@@ -1,0 +1,30 @@
+{
+  "name": "clientize-orchestrate",
+  "version": "0.4.0",
+  "private": true,
+  "description": "Clientize reverse-proxy client for Orchestrate.io",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hangarr/clientize-orchestrate.git"
+  },
+  "keywords": [
+    "clientize",
+    "orchestrate",
+    "proxy",
+    "client"
+  ],
+  "author": "Rick Hangartner",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hangarr/clientize-orchestrate/issues"
+  },
+  "homepage": "https://github.com/hangarr/clientize-orchestrate",
+  "dependencies": {
+    "orchestrate": "^0.4.0",
+    "request": "^2.51.0"
+  }
+}
