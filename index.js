@@ -10,7 +10,7 @@
 	  , url = require('url')
 	  , Q = require('kew')
 	  , assert = require('assert')
-	  , pjson = require('../package.json');
+	  , pjson = require('./package.json');
 
 	/**
 	 * Clientize Orchestrate.io client.
