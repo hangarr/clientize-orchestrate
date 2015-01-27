@@ -29,7 +29,7 @@
     "orchestrate": "^0.4.0",
     "request": "^2.51.0"
   },
-  "browserify": {
+  "browser": {
     "request": "browser-request"
   }
 }
