@@ -129,7 +129,8 @@
 		var defer = Q.defer();
 		headers = headers || {};
 		if (!headers['Content-Type']) headers['Content-Type'] = this.contentType;
-		headers['User-Agent'] = this._userAgent;
+		if(typeof XMLHttpRequest !== 'undefined')
+			headers['User-Agent'] = this._userAgent;
 /*
 		request({
 			method: method,
