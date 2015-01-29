@@ -189,7 +189,7 @@
 		};
 		
 		return headers;
-	}
+	};
 	
 	/**
 	 * Parses all links from the "Link" http response header. The parsed links
@@ -209,7 +209,7 @@
 			res.headers = ProxyClient.BrowserResponseHeaders(res);
 		};
 
-		Client.prototype._parseLinks.call(this, res);
+		return Client.prototype._parseLinks.call(this, res);
 	};
 	
 	/**
