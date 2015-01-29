@@ -158,6 +158,59 @@
 		.then(this._parseLinks.bind(this));
 	};
 
+	/**
+	 * 
+	 * NOTE: XMLHttpRequest returns response headers as a string that
+	 * must be retrieved with the "getAllResponseHeaders()" separate method.
+	 * 
+	 * This function converts the header string into an object.
+	 * 
+	 * @param {Object} res The response object that carries the headers
+	 */
+	ProxyClient.BrowserResponseHeaders = function(res) {
+		// where the headers hide
+		var headers = {};
+		var rhs = res.getAllResponseHeaders();
+		if(!rhs) {
+			return headers;
+		};
+		
+		// split into header pair substrings then on the first ': ' of each
+		// into key-value pairs.
+		var rhps = rhs.split('\u000d\u000a');
+		for(var i=0; i<rhps.length; i++) {
+			var rhp = rhps[i];
+			var ii = rhp.indexOf('\u003a\u0020');
+			if(ii > 0) {
+				var k = rhp.substring(0, ii);
+				var v = rhp.substring(ii+2)
+				headers[k] = v;
+			};
+		};
+		
+		return headers;
+	}
+	
+	/**
+	 * Parses all links from the "Link" http response header. The parsed links
+	 * are made available on the result as result.links.  Each link is an object
+	 * with the following properties:
+	 * url - The url for the link (may be relative)
+	 * rel - The link header's "rel" value (the logical link 'name'),
+	 * paramName* - Any url query parameters are available directly on the link
+	 * get() - Function to fetch the link, returns a promise.
+	 * @param {Object} res The response to parse the 'Link' header from
+	 * @param {Object} res The respons (so this function can be chained in
+	 *         promise calls).
+	 */
+	ProxyClient.prototype._parseLinks = function (res) {
+		// Deal with headers in the browser
+		if(typeof XMLHttpRequest !== 'undefined') {
+			res.headers = ProxyClient.BrowserResponseHeaders(res);
+		};
+
+		Client.prototype._parseLinks.call(this, res);
+	};
 	
 	/**
 	 * Generates and formats api url.
