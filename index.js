@@ -147,9 +147,16 @@
 			headers: headers,
 			body: JSON.stringify(data)
 		};
-		
+
 		if(typeof this._token === 'string' && this._token.length > 0)
 			opts.auth = {user: this._token};
+		else if(typeof this._token === 'object') {
+			if((typeof this._token.user === 'string' && this._token.user.length > 0) ||
+					(typeof this._token.pass === 'string' && this._token.pass.length > 0))
+				opts.auth = {user: this._token};
+			else if(typeof this._token.bearer === 'string' && this._token.bearer.length > 0)
+				opts.headers['X-Clientize-Authorization'] = 'Bearer ' + this._token.bearer;
+		}
 
 		request(opts, defer.makeNodeResolver());
 
