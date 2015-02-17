@@ -3,6 +3,10 @@
 
 This can be used client-side or server-side to talk directly to the Orchestrate.io API or to a Clientize reverse-proxy set up to talk to the Orchestrate.io API. The client is a child object derived from the Orchestrate.io v0.4.0 client.
 
+## NOTE: Using with AngularJS
+The Orchestrate client uses the `kew` promise library.  The modified client appears to work with AngularJS 1.3.  However, the AngularJS $q promise service interacts with the AngularJS digest cycle in a specific way that may cause `kew` to now work properly in some situations.
+
+## Description
 The reverse-proxy client incorporates three changes to the Orchestrate client to operate in the browser:
 
 1. The `request` HTTP client must be replaced with the `browser-request` HTTP client.
